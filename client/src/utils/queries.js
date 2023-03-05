@@ -63,6 +63,18 @@ export const QUERY_SINGLE_BOOK = gql`
     }
   }
 `;
+export const QUERY_BOOK = gql`
+  query book($bookId: ID!) {
+    book(bookId: $bookId) {
+      bookId
+      authors
+      description
+      title
+      image
+      link
+    }
+  }
+`;
 
 export const QUERY_ME = gql`
   query me {

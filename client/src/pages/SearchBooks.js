@@ -36,6 +36,12 @@ const SearchBooks = () => {
   const userData = data?.me || {};
 
   // create state for holding returned google api data
+  const [searchedBooks, setSearchedBooks] = useState([]);
+  // create state for holding our search field data
+  const [searchInput, setSearchInput] = useState("");
+
+  // create state to hold saved bookId values
+  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
   return (
     <div>
