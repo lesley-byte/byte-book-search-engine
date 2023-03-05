@@ -15,6 +15,26 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+    user: async (parent, { username }) => {
+      if (contex.user) {
+        const userData = await User.findOne({ username })
+          .select("-__v -password")
+          .populate("books");
+
+        return userData;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+    books: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return User.findOne(params).sort({ createdAt: -1 });
+      throw new AuthenticationError("Not logged in");
+    },
+    singleBook: async (parent, { username, bookId }) => {
+      const params = username ? { username, bookId } : { bookId };
+      return User.findOne(params).sort({ createdAt: -1 });
+      throw new AuthenticationError("Not logged in");
+    },
   },
   Mutation: {
     login: async (parent, { email, password }) => {
@@ -53,6 +73,19 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     removeBook: async (parent, { bookId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: { bookId } } },
+          { new: true }
+        );
+
+        return updatedUser;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    deleteBook: async (parent, { bookId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
