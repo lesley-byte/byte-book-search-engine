@@ -32,8 +32,9 @@ import {
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
 const SearchBooks = () => {
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data } = useQuery(QUERY_BOOKS);
   const userData = data?.me || {};
+  const [addBook, { error }] = useMutation(ADD_BOOK);
 
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
@@ -43,29 +44,93 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await addBook({
+        variables: { ...userData },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  const handleDeleteBook = async (bookId) => {
+    bookId.preventDefault();
+
+    try {
+      await deleteBook({
+        variables: { bookId },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  
+
   return (
     <div>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
           <h1>Search for Books!</h1>
-          <Form>
-            <Form.Row>
-              <Col xs={12} md={8}>
-                <Form.Control />
-              </Col>
-              <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
-                  Submit Search
-                </Button>
-              </Col>
-            </Form.Row>
-          </Form>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <Form onSubmit={handleFormSubmit}>
+              <Form.Row>
+                <Col xs={12} md={8}>
+                  <Form.Control
+                    name="searchInput"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    type="text"
+                    size="lg"
+                    placeholder="Search for a book"
+                  />
+                </Col>
+                <Col xs={12} md={4}>
+                  <Button type="submit" variant="success" size="lg">
+                    Submit Search
+                  </Button>
+                </Col>
+              </Form.Row>
+            </Form>
+          )}
         </Container>
       </Jumbotron>
-
       <Container>
-        <h2>{}</h2>
-        <CardColumns>{}</CardColumns>
+        <h2>
+          {searchedBooks.length
+            ? `Viewing ${searchedBooks.length} results:`
+            : "Search for a book to begin"}
+        </h2>
+        <CardColumns>
+          {searchedBooks.map((book) => {
+            return (
+              <Card key={book.bookId} border="dark">
+                {book.image ? (
+                  <Card.Img
+                    src={book.image}
+                    alt={`The cover for ${book.title}`}
+                    variant="top"
+                  />
+                ) : null}
+                <Card.Body>
+                  <Card.Title>{book.title}</Card.Title>
+                  <p className="small">Authors: {book.authors}</p>
+                  <Card.Text>{book.description}</Card.Text>
+                  <Button
+                    className="btn-block btn-danger"
+                    id={book.bookId}
+                    onClick={handleDeleteBook}
+                  >
+                    Delete this Book!
+                  </Button>
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </CardColumns>
       </Container>
     </div>
   );

@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
+import React, { useState } from "react";
+import { link, useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   Jumbotron,
   Container,
@@ -9,12 +10,25 @@ import {
 } from "react-bootstrap";
 
 import Auth from "../utils/auth";
+import {
+  GET_ME,
+  QUERY_USER,
+  QUERY_BOOKS,
+  QUERY_SINGLE_BOOK,
+  QUERY_ME,
+} from "../utils/queries";
+import {
+  ADD_BOOK,
+  DELETE_BOOK,
+  LOGIN_USER,
+  ADD_USER,
+  SAVE_BOOK,
+  REMOVE_BOOK,
+} from "../utils/mutations";
 import { removeBookId } from "../utils/localStorage";
-import { GET_ME } from "../utils/queries";
-import { DELETE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
-  const { loading, data } = useQuery(GET_ME);
+  const { loading, data } = useQuery(QUERY_ME);
   const [deleteBook, { error }] = useMutation(DELETE_BOOK);
 
   const userData = data?.users || {};
