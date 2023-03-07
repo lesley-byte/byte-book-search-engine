@@ -1,0 +1,33 @@
+[
+  {
+    "username": "admin",
+    "email": "admin@admin.com",
+    "password": "password",
+    "savedBooks": [
+      {
+        "authors": ["J. R. R. Tolkien"],
+        "description": "The Lord of the Rings is an epic high fantasy novel written by English author and scholar J. R. R. Tolkien. The story began as a sequel to Tolkien's 1937 fantasy novel The Hobbit, but eventually developed into a much larger work. Written in stages between 1937 and 1949, The Lord of the Rings is one of the best-selling novels ever written, with over 150 million copies sold.",
+        "bookId": "1",
+        "image": "https://images-na.ssl-images-amazon.com/images/I/51Zt3JZJFJL._SX331_BO1,204,203,200_.jpg",
+        "link": "https://www.amazon.com/Lord-Rings-1-J-R-Tolkien/dp/0618260307",
+        "title": "The Lord of the Rings"
+      },
+      {
+        "authors": ["J. K. Rowling"],
+        "description": "The Lord of the Rings is an epic high fantasy novel written by English author and scholar J. R. R. Tolkien. The story began as a sequel to Tolkien's 1937 fantasy novel The Hobbit, but eventually developed into a much larger work. Written in stages between 1937 and 1949, The Lord of the Rings is one of the best-selling novels ever written, with over 150 million copies sold.",
+        "bookId": "2",
+        "image": "https://images-na.ssl-images-amazon.com/images/I/51Zt3JZJFJL._SX331_BO1,204,203,200_.jpg",
+        "link": "https://www.amazon.com/Lord-Rings-1-J-R-Tolkien/dp/0618260307",
+        "title": "The Lord of the Rings"
+      },
+      {
+        "authors": ["J. R. R. Tolkien"],
+        "description": "The Lord of the Rings is an epic high fantasy novel written by English author and scholar J. R. R. Tolkien. The story began as a sequel to Tolkien's 1937 fantasy novel The Hobbit, but eventually developed into a much larger work. Written in stages between 1937 and 1949, The Lord of the Rings is one of the best-selling novels ever written, with over 150 million copies sold.",
+        "bookId": "3",
+        "image": "https://images-na.ssl-images-amazon.com/images/I/51Zt3JZJFJL._SX331_BO1,204,203,200_.jpg",
+        "link": "https://www.amazon.com/Lord-Rings-1-J-R-Tolkien/dp/0618260307",
+        "title": "The Lord of the Rings"
+      }
+    ]
+  }
+]
