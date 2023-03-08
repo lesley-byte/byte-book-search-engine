@@ -10,12 +10,12 @@ import {
 } from "react-bootstrap";
 
 import Auth from "../utils/auth";
-import { QUERY_USER } from "../utils/queries";
+import { QUERY_ME } from "../utils/queries";
 import { DELETE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
-  const { loading, data } = useQuery(QUERY_USER);
-  const userData = data?.user || {};
+  const { loading, data } = useQuery(QUERY_ME);
+  const userData = data?.me || {};
   console.log(data);
   const [deleteBook, { error }] = useMutation(DELETE_BOOK);
 
@@ -48,7 +48,7 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
+          {userData.savedBooks
             ? `Viewing ${userData.savedBooks.length} saved ${
                 userData.savedBooks.length === 1 ? "book" : "books"
               }:`
