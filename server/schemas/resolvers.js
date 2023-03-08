@@ -15,15 +15,9 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    user: async (parent, { username }) => {
-      if (contex.user) {
-        const userData = await User.findOne({ username })
-          .select("-__v -password")
-          .populate("books");
-
-        return userData;
-      }
-      throw new AuthenticationError("Not logged in");
+    user: async (parent, { username },context) => {
+      const params = username ? { username } : {};
+      return User.findOne(params)
     },
     books: async (parent, { username }) => {
       const params = username ? { username } : {};
