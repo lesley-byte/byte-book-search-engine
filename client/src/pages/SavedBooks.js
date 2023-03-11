@@ -15,9 +15,10 @@ import { DELETE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(QUERY_ME);
-  const userData = data?.me || {};
   console.log(data);
   const [deleteBook, { error }] = useMutation(DELETE_BOOK);
+
+  const userData = data?.me || {};
 
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -30,14 +31,14 @@ const SavedBooks = () => {
       const { data } = await deleteBook({
         variables: { bookId },
       });
-
-      if (!data) {
-        throw new Error("Something went wrong!");
-      }
     } catch (err) {
       console.error(err);
     }
   };
+
+  if (loading) {
+    return <h2>beep beep loading...</h2>;
+  }
 
   return (
     <>
