@@ -14,7 +14,7 @@ Refactored book search engine. This is an unfinished project. I am working on it
 
 ## Photo of the app:
 
-[screenshot](./assets/images/screenshot.png)
+![screenshot](./assets/images/screenshot.png)
 
 ## Technologies Used
 
