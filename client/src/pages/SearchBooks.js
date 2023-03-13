@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_BOOK } from "../utils/mutations";
-
+import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { QUERY_ME } from "../utils/queries";
 
 import Auth from "../utils/auth";
@@ -37,7 +37,14 @@ const SearchBooks = () => {
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
   const { loading, data } = useQuery(QUERY_ME);
   const userData = data?.me || {};
-  const savedBookIds = userData.savedBooks?.map((book) => book.bookId) || [];
+ 
+  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+
+  
+  useEffect(() => {
+    return () => saveBookIds(savedBookIds);
+  });
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -59,7 +66,6 @@ const SearchBooks = () => {
         title: book.title,
         description: book.description,
         image: book.image,
-        link: book.link,
       }));
 
       setSearchedBooks(bookData);
@@ -83,6 +89,7 @@ const SearchBooks = () => {
         variables: { bookData: { ...bookToSave } },
       });
       console.log("saved book data");
+      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
     }
@@ -140,7 +147,7 @@ const SearchBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
-                  {/* {Auth.loggedIn() && (
+                  {Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some(
                         (savedBookId) => savedBookId === book.bookId
@@ -154,7 +161,7 @@ const SearchBooks = () => {
                         ? "This book has already been saved!"
                         : "Save this Book!"}
                     </Button>
-                  )} */}
+                  )}
                 </Card.Body>
               </Card>
             );
