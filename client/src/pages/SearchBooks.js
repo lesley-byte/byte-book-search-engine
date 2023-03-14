@@ -62,10 +62,10 @@ const SearchBooks = () => {
 
       const bookData = response.map((book) => ({
         bookId: book.bookId,
-        authors: book.authors,
+        authors: book.authors || ["No author to display"],
         title: book.title,
         description: book.description,
-        image: book.image,
+        image: book.image
       }));
 
       setSearchedBooks(bookData);

@@ -10,7 +10,7 @@ Refactored book search engine. This is an unfinished project. I am working on it
 
 ## Deployed App at Heroku:
 
-[deployed app](https://calm-chamber-23492.herokuapp.com/)
+[deployed app](https://afternoon-oasis-76908.herokuapp.com/)
 
 ## Photo of the app:
 
