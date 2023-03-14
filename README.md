@@ -1,6 +1,6 @@
 # byte-book-search-engine
 
-Refactored book search engine. This is an unfinished project. I am working on it in my spare time. I am using it to learn more about the MERN stack. Unfortunately the starter code didn't perform as advertised and the local storage component has not been implemented since it was supposed to be a MERN stack app and not a local storage app. I am working on it.
+Refactored book search engine. This is an unfinished project. I am working on it in my spare time. I am using it to learn more about the MERN stack.  The goal was to add graphql to a mongodb app.
 
 ## Installation
 
