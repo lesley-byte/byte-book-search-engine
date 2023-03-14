@@ -1,6 +1,6 @@
 # byte-book-search-engine
 
-Refactored book search engine. This is an unfinished project. I am working on it in my spare time. I am using it to learn more about the MERN stack.  The goal was to add graphql to a mongodb app.
+Refactored book search engine. I added GraphQL API and Apollo Server to the existing MERN app. Starter code was provided by the Rutgers Coding Bootcamp.
 
 ## Installation
 
@@ -36,6 +36,7 @@ I'm not taking contributions at this time.
 
 ## Credits
 
+- [Rutgers Coding Bootcamp](https://bootcamp.rutgers.edu/coding/)
 - [React](https://reactjs.org/)
 - [Node](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
